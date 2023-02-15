@@ -1,7 +1,9 @@
 #! /usr/bin/env python
 
-from .simhash import unsigned_hash, num_differing_bits, compute, find_all
 from six.moves import range as six_range
+
+from .simhash import (compute, find_all, find_all_single_permutation,
+                      num_differing_bits, unsigned_hash)
 
 
 def shingle(tokens, window=4):

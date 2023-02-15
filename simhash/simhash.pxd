@@ -19,9 +19,14 @@ cdef extern from "simhash-cpp/include/simhash.h" namespace "Simhash":
         size_t operator()(const match_t& v) const
 
     ctypedef unordered_set[match_t, match_t_hash] matches_t
+    ctypedef vector[hash_t] masks_t
 
     cpdef size_t num_differing_bits(hash_t a, hash_t b)
     hash_t compute(const vector[hash_t]& hashes)
     matches_t find_all(unordered_set[hash_t] hashes,
+                       size_t number_of_blocks,
+                       size_t different_bits)
+    matches_t find_all_single_permutation(unordered_set[hash_t] hashes,
+                       uint64_t index,
                        size_t number_of_blocks,
                        size_t different_bits)

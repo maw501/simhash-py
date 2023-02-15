@@ -3,6 +3,7 @@ import struct
 
 from simhash cimport compute as c_compute
 from simhash cimport find_all as c_find_all
+from simhash cimport find_all_single_permutation as c_find_all_single_permutation
 
 
 def unsigned_hash(bytes obj):
@@ -24,6 +25,19 @@ def find_all(hashes, number_of_blocks, different_bits):
     restored to their original state.
     '''
     cdef matches_t results_set = c_find_all(hashes, number_of_blocks, different_bits)
+    cdef vector[match_t] results_vector
+    results_vector.assign(results_set.begin(), results_set.end())
+    return results_vector
+
+def find_all_single_permutation(hashes, permutation_index, number_of_blocks, different_bits):
+    """ 
+    Find the set of all matches within the provided vector of hashes for a
+    single permutation index.
+
+    The provided hashes are manipulated in place, but upon completion are
+    restored to their original state.
+    """
+    cdef matches_t results_set = c_find_all_single_permutation(hashes, permutation_index, number_of_blocks, different_bits)
     cdef vector[match_t] results_vector
     results_vector.assign(results_set.begin(), results_set.end())
     return results_vector
