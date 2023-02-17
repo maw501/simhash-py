@@ -1,5 +1,6 @@
 #! /usr/bin/env python
 
+import math
 import re
 import unittest
 
@@ -105,6 +106,88 @@ class TestFindAll(unittest.TestCase):
         for blocks in range(4, 10):
             self.assertEqual(
                 sorted(expected), sorted(simhash.find_all(hashes, blocks, 3)))
+
+
+class TestFindAllSinglePermutation(unittest.TestCase):
+    '''Tests about find_all_single_permutation.'''
+
+    def test_basic(self):
+        hashes = [
+            0x000000FF, 0x000000EF, 0x000000EE, 0x000000CE, 0x00000033,
+            0x0000FF00, 0x0000EF00, 0x0000EE00, 0x0000CE00, 0x00003300,
+            0x00FF0000, 0x00EF0000, 0x00EE0000, 0x00CE0000, 0x00330000,
+            0xFF000000, 0xEF000000, 0xEE000000, 0xCE000000, 0x33000000
+        ]
+        expected = [
+            (0x000000EF, 0x000000FF),
+            (0x000000EE, 0x000000EF),
+            (0x000000EE, 0x000000FF),
+            (0x000000CE, 0x000000EE),
+            (0x000000CE, 0x000000EF),
+            (0x000000CE, 0x000000FF),
+            (0x0000EF00, 0x0000FF00),
+            (0x0000EE00, 0x0000EF00),
+            (0x0000EE00, 0x0000FF00),
+            (0x0000CE00, 0x0000EE00),
+            (0x0000CE00, 0x0000EF00),
+            (0x0000CE00, 0x0000FF00),
+            (0x00EF0000, 0x00FF0000),
+            (0x00EE0000, 0x00EF0000),
+            (0x00EE0000, 0x00FF0000),
+            (0x00CE0000, 0x00EE0000),
+            (0x00CE0000, 0x00EF0000),
+            (0x00CE0000, 0x00FF0000),
+            (0xEF000000, 0xFF000000),
+            (0xEE000000, 0xEF000000),
+            (0xEE000000, 0xFF000000),
+            (0xCE000000, 0xEE000000),
+            (0xCE000000, 0xEF000000),
+            (0xCE000000, 0xFF000000)
+        ]
+        for blocks in range(4, 10):
+            matches = []
+            num_perms = math.comb(blocks, 3)  # actually # combinations
+            for perm in range(num_perms):
+                matched = simhash.find_all_single_permutation(hashes, perm, blocks, 3)
+                matches.extend(matched)
+            matches = sorted(list(set(matches)))
+            self.assertEqual(sorted(expected), matches)
+
+    def test_diverse(self):
+        hashes = [
+            0x00000000, 0x10101000, 0x10100010, 0x10001010, 0x00101010,
+                        0x01010100, 0x01010001, 0x01000101, 0x00010101
+        ]
+        expected = [
+            (0x00000000, 0x10101000),
+            (0x00000000, 0x10100010),
+            (0x00000000, 0x10001010),
+            (0x00000000, 0x00101010),
+            (0x00000000, 0x01010100),
+            (0x00000000, 0x01010001),
+            (0x00000000, 0x01000101),
+            (0x00000000, 0x00010101),
+            (0x00101010, 0x10001010),
+            (0x00101010, 0x10100010),
+            (0x00101010, 0x10101000),
+            (0x10001010, 0x10100010),
+            (0x10001010, 0x10101000),
+            (0x10100010, 0x10101000),
+            (0x00010101, 0x01000101),
+            (0x00010101, 0x01010001),
+            (0x00010101, 0x01010100),
+            (0x01000101, 0x01010001),
+            (0x01000101, 0x01010100),
+            (0x01010001, 0x01010100)
+        ]
+        for blocks in range(4, 10):
+            matches = []
+            num_perms = math.comb(blocks, 3)  # actually # combinations
+            for perm in range(num_perms):
+                matched = simhash.find_all_single_permutation(hashes, perm, blocks, 3)
+                matches.extend(matched)
+            matches = sorted(list(set(matches)))
+            self.assertEqual(sorted(expected), matches)
 
 
 class TestShingle(unittest.TestCase):
