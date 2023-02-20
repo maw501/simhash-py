@@ -11,6 +11,13 @@ Simhash Near-Duplicate Detection
 This library enables the efficient identification of near-duplicate documents using
 `simhash` using a C++ extension.
 
+Fork details
+=====
+
+This library is a fork of [simhash-py](https://github.com/seomoz/simhash-py). The *only* way it differs is to offer a (Python) convenience function, `find_all_single_permutation` which allows parallelisation using `joblib` over permutations in the near-duplicate search. This can be 2-5x quicker depending on the choices for `blocks` and `bits`/`distance` in the `simhash` algorithm. 
+
+A notebook demonstrating the performance difference and usage is included. 
+
 Usage
 =====
 `simhash` differs from most hashes in that its goal is to have two similar documents
@@ -74,7 +81,7 @@ Building
 This is installable via `pip`:
 
 ```bash
-pip install git+https://github.com/seomoz/simhash-py.git
+pip install git+https://github.com/maw501/simhash-py.git
 ```
 
 It can also be built from `git`:
@@ -84,15 +91,27 @@ git submodule update --init --recursive
 python setup.py install
 ```
 
-or 
-```bash
-pip install simhash-py
-```
 under osx, you should 
 ```bash
 export MACOSX_DEPLOYMENT_TARGET = 10.x (10.9,10.10...)
 ```
-first
+first.
+
+## Using a conda environment
+
+```
+conda create --name simhash python=3.8
+pip install -r requirements.txt
+pip install .
+```
+
+To register the environment with Jupyter:
+
+```
+conda install -c anaconda ipykernel
+python -m ipykernel install --user --name=simhash
+sudo sv restart jupyter
+```
 
 Benchmark
 =========
