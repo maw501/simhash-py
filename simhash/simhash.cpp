@@ -1782,13 +1782,13 @@ static PyObject *__pyx_pf_7simhash_7simhash_4find_all(CYTHON_UNUSED PyObject *__
  *     return results_vector
  * 
  * def find_all_single_permutation(hashes, permutation_index, number_of_blocks, different_bits):             # <<<<<<<<<<<<<<
- *     """ """
- *     cdef matches_t results_set = c_find_all_single_permutation(hashes, permutation_index, number_of_blocks, different_bits)
+ *     """
+ *     Find the set of all matches within the provided vector of hashes for a
  */
 
 /* Python wrapper */
 static PyObject *__pyx_pw_7simhash_7simhash_7find_all_single_permutation(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_7simhash_7simhash_6find_all_single_permutation[] = " ";
+static char __pyx_doc_7simhash_7simhash_6find_all_single_permutation[] = " \n    Find the set of all matches within the provided vector of hashes for a\n    single permutation index.\n\n    The provided hashes are manipulated in place, but upon completion are\n    restored to their original state.\n    ";
 static PyObject *__pyx_pw_7simhash_7simhash_7find_all_single_permutation(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_hashes = 0;
   PyObject *__pyx_v_permutation_index = 0;
@@ -1882,20 +1882,20 @@ static PyObject *__pyx_pf_7simhash_7simhash_6find_all_single_permutation(CYTHON_
   PyObject *__pyx_t_5 = NULL;
   __Pyx_RefNannySetupContext("find_all_single_permutation", 0);
 
-  /* "simhash/simhash.pyx":34
- * def find_all_single_permutation(hashes, permutation_index, number_of_blocks, different_bits):
- *     """ """
+  /* "simhash/simhash.pyx":40
+ *     restored to their original state.
+ *     """
  *     cdef matches_t results_set = c_find_all_single_permutation(hashes, permutation_index, number_of_blocks, different_bits)             # <<<<<<<<<<<<<<
  *     cdef vector[match_t] results_vector
  *     results_vector.assign(results_set.begin(), results_set.end())
  */
-  __pyx_t_1 = __pyx_convert_unordered_set_from_py_Simhash_3a__3a_hash_t(__pyx_v_hashes); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 34, __pyx_L1_error)
-  __pyx_t_2 = __Pyx_PyInt_As_uint64_t(__pyx_v_permutation_index); if (unlikely((__pyx_t_2 == ((uint64_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 34, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_PyInt_As_size_t(__pyx_v_number_of_blocks); if (unlikely((__pyx_t_3 == (size_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 34, __pyx_L1_error)
-  __pyx_t_4 = __Pyx_PyInt_As_size_t(__pyx_v_different_bits); if (unlikely((__pyx_t_4 == (size_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 34, __pyx_L1_error)
+  __pyx_t_1 = __pyx_convert_unordered_set_from_py_Simhash_3a__3a_hash_t(__pyx_v_hashes); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 40, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_As_uint64_t(__pyx_v_permutation_index); if (unlikely((__pyx_t_2 == ((uint64_t)-1)) && PyErr_Occurred())) __PYX_ERR(0, 40, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_As_size_t(__pyx_v_number_of_blocks); if (unlikely((__pyx_t_3 == (size_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 40, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyInt_As_size_t(__pyx_v_different_bits); if (unlikely((__pyx_t_4 == (size_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 40, __pyx_L1_error)
   __pyx_v_results_set = Simhash::find_all_single_permutation(__pyx_t_1, __pyx_t_2, __pyx_t_3, __pyx_t_4);
 
-  /* "simhash/simhash.pyx":36
+  /* "simhash/simhash.pyx":42
  *     cdef matches_t results_set = c_find_all_single_permutation(hashes, permutation_index, number_of_blocks, different_bits)
  *     cdef vector[match_t] results_vector
  *     results_vector.assign(results_set.begin(), results_set.end())             # <<<<<<<<<<<<<<
@@ -1905,16 +1905,16 @@ static PyObject *__pyx_pf_7simhash_7simhash_6find_all_single_permutation(CYTHON_
     __pyx_v_results_vector.assign(__pyx_v_results_set.begin(), __pyx_v_results_set.end());
   } catch(...) {
     __Pyx_CppExn2PyErr();
-    __PYX_ERR(0, 36, __pyx_L1_error)
+    __PYX_ERR(0, 42, __pyx_L1_error)
   }
 
-  /* "simhash/simhash.pyx":37
+  /* "simhash/simhash.pyx":43
  *     cdef vector[match_t] results_vector
  *     results_vector.assign(results_set.begin(), results_set.end())
  *     return results_vector             # <<<<<<<<<<<<<<
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_5 = __pyx_convert_vector_to_py_Simhash_3a__3a_match_t(__pyx_v_results_vector); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 37, __pyx_L1_error)
+  __pyx_t_5 = __pyx_convert_vector_to_py_Simhash_3a__3a_match_t(__pyx_v_results_vector); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 43, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_r = __pyx_t_5;
   __pyx_t_5 = 0;
@@ -1924,8 +1924,8 @@ static PyObject *__pyx_pf_7simhash_7simhash_6find_all_single_permutation(CYTHON_
  *     return results_vector
  * 
  * def find_all_single_permutation(hashes, permutation_index, number_of_blocks, different_bits):             # <<<<<<<<<<<<<<
- *     """ """
- *     cdef matches_t results_set = c_find_all_single_permutation(hashes, permutation_index, number_of_blocks, different_bits)
+ *     """
+ *     Find the set of all matches within the provided vector of hashes for a
  */
 
   /* function exit code */
